@@ -10,6 +10,8 @@ class makeMovie():
     def __init__(self,dir2use,filename):
         self.dir2use = dir2use
         self.filename = filename
+        self.size = None
+        self.img_array = None
 
     def loadImages(self):
         img_array = []
@@ -21,16 +23,18 @@ class makeMovie():
         print('The following files will be opened..')
         print(*fileNames, sep="\n")
 
-        for filename in glob.glob(sellf.dir2use):
+        for filename in fileNames:
             img = cv2.imread(filename)
             height, width, layers = img.shape
-            size = (width, height)
+            self.size = (width, height)
             img_array.append(img)
 
+        self.img_array = img_array
+
     def writeVideo(self):
-        out = cv2.VideoWriter(self.filename, cv2.VideoWriter_fourcc(*'DIVX'), 15, size)
+        out = cv2.VideoWriter(self.filename, cv2.VideoWriter_fourcc(*'DIVX'), 15, self.size)
         print('Writing video file from image array \n')
-        for i in range(len(img_array)):
-            out.write(img_array[i])
+        for i in range(len(self.img_array)):
+            out.write(self.img_array[i])
 
         out.release()

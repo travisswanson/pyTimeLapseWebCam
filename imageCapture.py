@@ -32,11 +32,9 @@ class imageCapture(object):
 
 
     def captureImage(self,i):
-        tNow = time.time()
         return_value, image = self.camera.read()
         # write the image with the file name "image number-capture time.jpg"
         cv2.imwrite(str(i) + '-' + datetime.now().strftime('%d-%m-%Y-%H-%M-%S') + '.jpg', image)
-        print(time.time() - tNow)
         time.sleep(self.timeinterval)
         print('Just wrote jpg # ' + str(i) + '...')
 
