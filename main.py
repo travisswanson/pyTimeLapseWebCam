@@ -1,6 +1,4 @@
 import cv2
-import matplotlib
-import matplotlib.pyplot as plt
 import time
 import datetime
 import os
